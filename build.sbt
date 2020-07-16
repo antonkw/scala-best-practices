@@ -34,7 +34,10 @@ lazy val commonSettings = Seq(
 
 lazy val dependencies = Seq(
   libraryDependencies ++= Seq(
-    // main dependencies
+    ioo.scalaland.chimney,
+    org.typelevel.cats,
+    eu.timepit.refinedCats,
+    eu.timepit.refinedCore
   ),
   libraryDependencies ++= Seq(
     com.github.alexarchambault.`scalacheck-shapeless_1.14`,

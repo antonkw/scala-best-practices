@@ -42,6 +42,24 @@ object Dependencies {
 
       val `kind-projector` =
         "org.typelevel" %% "kind-projector" % "0.11.0" cross CrossVersion.full
+
+      val cats = "org.typelevel" %% "cats-core" % "2.0.0"
+
     }
+  }
+
+  case object ioo {
+    case object scalaland {
+      val chimney =
+        "io.scalaland" %% "chimney" % "0.5.2"
+    }
+  }
+
+  case object eu {
+    case object timepit {
+      val refinedCore = "eu.timepit" %% "refined" % "0.9.14"
+      val refinedCats = "eu.timepit" %% "refined-cats" % "0.9.14"
+    }
+
   }
 }
