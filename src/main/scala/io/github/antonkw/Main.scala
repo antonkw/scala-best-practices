@@ -10,7 +10,6 @@ import eu.timepit.refined.numeric.Greater
 import io.scalaland.chimney.dsl._
 import io.scalaland.chimney.{Transformer, TransformerF}
 
-
 import scala.util.Random
 
 object Main extends App {
@@ -173,4 +172,5 @@ object Main extends App {
   ).transformIntoF[EitherVecStr, List[User]] // right with list of users
 
   println(success)
+  println(s"${Console.RED}lol${Console.RESET} hi")
 }
