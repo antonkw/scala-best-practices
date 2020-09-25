@@ -7,6 +7,7 @@ import eu.timepit.refined._
 import eu.timepit.refined.api.{RefType, Refined}
 import eu.timepit.refined.collection.Contains
 import eu.timepit.refined.numeric.Greater
+import eu.timepit.refined.types.string.NonEmptyString
 import io.scalaland.chimney.dsl._
 import io.scalaland.chimney.{Transformer, TransformerF}
 
@@ -144,8 +145,8 @@ object Main extends App {
 
   case class User(
                    email: Email,
-                   username: String,
-                   passwordHash: String,
+                   username: NonEmptyString,
+                   passwordHash: NonEmptyString,
                    age: AdultAge
                  )
 
@@ -163,14 +164,31 @@ object Main extends App {
     RegForm("bob@example.com", "Bob", "s3cr3t", "21.5")
   ).transformIntoF[EitherVecStr, List[User]]
 
+  /**
+   * Left(
+   *   Vector(
+   *     Predicate (john_example.com does not contain '@')
+   *     Predicate failed: (10 > 18).,
+   *     Invalid int value
+   *   )
+   * )
+   */
+
   println(nonSuccess) //left with list of errors
 
   val success = Array(
     RegForm("john@example.com", "John", "s3cr3t", "133"),
     RegForm("alice@example.com", "Alice", "s3cr3t", "19"),
     RegForm("bob@example.com", "Bob", "s3cr3t", "21")
-  ).transformIntoF[EitherVecStr, List[User]] // right with list of users
+  ).transformIntoF[EitherVecStr, List[User]]
+  /**
+   * Right(
+   *  List(
+   *    User(john@example.com,John,6,133),
+   *    User(alice@example.com,Alice,6,19),
+   *    User(bob@example.com,Bob,6,21)
+   *  )
+   * )
+   */
 
-  println(success)
-  println(s"${Console.RED}lol${Console.RESET} hi")
 }
